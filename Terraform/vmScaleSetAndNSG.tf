@@ -115,6 +115,7 @@ resource "azurerm_windows_virtual_machine_scale_set" "scaleSet" {
   ]
 }
 
+# Storage
 resource "azurerm_storage_account" "appstorage998" {
   name = "appstorage998"
   resource_group_name = azurerm_resource_group.rg01.name
@@ -141,6 +142,7 @@ resource "azurerm_storage_blob" "IIS_Config" {
    depends_on=[azurerm_storage_container.data]
 }
 
+# Scale Set extension
 resource "azurerm_virtual_machine_scale_set_extension" "scaleSet-extensions" {
   name                         = "scaleSet-extension"
   virtual_machine_scale_set_id = azurerm_windows_virtual_machine_scale_set.scaleSet.id
@@ -158,6 +160,7 @@ resource "azurerm_virtual_machine_scale_set_extension" "scaleSet-extensions" {
   SETTINGS
 }
 
+# Network Security Group
 resource "azurerm_network_security_group" "nsg01" {
   name = "nsg01"
   location = azurerm_resource_group.rg01.location
